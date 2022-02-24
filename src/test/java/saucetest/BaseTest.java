@@ -33,7 +33,7 @@ public class BaseTest {
         chromeOptions.addArguments("--ignore-certificate-errors");
         chromeOptions.addArguments("--headless");
         driver = new ChromeDriver(chromeOptions);
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(0));
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         loginPage = new LoginPage(driver);
         catalogPage = new CatalogPage(driver);
         cartPage = new CartPage(driver);
