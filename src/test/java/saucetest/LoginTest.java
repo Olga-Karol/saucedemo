@@ -49,7 +49,7 @@ public class LoginTest extends BaseTest {
         );
     }
 
-    @Test (dataProvider = "Invalid login data", description = "check all invalid login case", priority = 2)
+    //@Test (dataProvider = "Invalid login data", description = "check all invalid login case", priority = 2)
     public void invalidLoginTest(String username, String password, String errorMessage, String message){
         openLoginPage();
         Assert.assertEquals(
@@ -58,6 +58,18 @@ public class LoginTest extends BaseTest {
                 .getElementText(ERROR_TEXT_MESSAGE),
                  errorMessage,
                  message
+        );
+    }
+
+    @Test
+    public void invalidLoginTest1(){
+        openLoginPage();
+        Assert.assertEquals(
+                loginPage
+                        .invalidLogin(INVALID_USERNAME, LoginPage.PASSWORD)
+                        .getElementText(ERROR_TEXT_MESSAGE),
+                INVALID_USERNAME_PASSWORD_TEXT,
+                "Error text is not correct"
         );
     }
 
