@@ -14,10 +14,10 @@ public class LoginTest extends BaseTest {
     @DataProvider(name = "Invalid login data")
     public Object[][] inputForLoginForm() {
         return new Object[][]{
-                {INVALID_USERNAME, LoginPage.PASSWORD, INVALID_USERNAME_PASSWORD_TEXT, "Error text is not correct"},
-                {LoginPage.USERNAME, INVALID_PASSWORD, INVALID_USERNAME_PASSWORD_TEXT, "Error text is not correct"},
-                {"", LoginPage.PASSWORD, EMPTY_USERNAME_TEXT, "Error text is not correct"},
-                {LoginPage.USERNAME, "", EMPTY_PASSWORD_TEXT, "Error text is not correct"},
+                {INVALID_USERNAME, PASSWORD, INVALID_USERNAME_PASSWORD_TEXT, "Error text is not correct"},
+                {USERNAME, INVALID_PASSWORD, INVALID_USERNAME_PASSWORD_TEXT, "Error text is not correct"},
+                {"", PASSWORD, EMPTY_USERNAME_TEXT, "Error text is not correct"},
+                {USERNAME, "", EMPTY_PASSWORD_TEXT, "Error text is not correct"},
         };
     }
 
@@ -49,7 +49,7 @@ public class LoginTest extends BaseTest {
         );
     }
 
-    //@Test (dataProvider = "Invalid login data", description = "check all invalid login case", priority = 2)
+    @Test (dataProvider = "Invalid login data", description = "check all invalid login case", priority = 2)
     public void invalidLoginTest(String username, String password, String errorMessage, String message){
         openLoginPage();
         Assert.assertEquals(
@@ -61,17 +61,6 @@ public class LoginTest extends BaseTest {
         );
     }
 
-    @Test
-    public void invalidLoginTest1(){
-        openLoginPage();
-        Assert.assertEquals(
-                loginPage
-                        .invalidLogin(INVALID_USERNAME, LoginPage.PASSWORD)
-                        .getElementText(ERROR_TEXT_MESSAGE),
-                INVALID_USERNAME_PASSWORD_TEXT,
-                "Error text is not correct"
-        );
-    }
 
     @Test(dataProvider ="check placeholders", description = "check fields placeholder", priority = 3)
     public void placeholderTest(By fieldLocator, String textPlaceholder, String message) {
