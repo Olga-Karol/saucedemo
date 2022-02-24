@@ -7,14 +7,13 @@ pipeline {
     }
 
     stages {
-        stage('Build') {
+        stage('tests') {
             steps {
                 // Get some code from a GitHub repository
                 git 'https://github.com/Olga-Karol/saucedemo.git'
 
-
-                // To run Maven on a Windows agent, use
-                bat "mvn clean test -Dmaven.compiler.source=11 -Dmaven.compiler.target=11"
+                // Run Maven on a Unix agent.
+                bat "mvn clean test -Dmaven.test.failure.ignore=true"
             }
 
             post {
@@ -22,9 +21,23 @@ pipeline {
                 // failed, record the test results and archive the jar file.
                 success {
                     junit '**/target/surefire-reports/TEST-*.xml'
-                    archiveArtifacts 'target/*.jar'
                 }
             }
         }
+
+/*         stage('reports') {
+            steps {
+                script {
+                     allure([
+                             includeProperties: false,
+                             jdk: '',
+                             properties: [],
+                             reportBuildPolicy: 'ALWAYS',
+                             results: [[path: 'target/allure-results']]
+                     ])
+                }
+            }
+        } */
+
     }
 }
