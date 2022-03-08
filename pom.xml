@@ -17,6 +17,8 @@
         <default.env>staging</default.env>
         <selenium.version>4.1.2</selenium.version>
         <testng.version>7.5</testng.version>
+        <allure-testng.version>2.13.8</allure-testng.version>
+        <aspectj.version>1.9.8</aspectj.version>
     </properties>
 
     <dependencies>
@@ -31,10 +33,14 @@
             <artifactId>selenium-java</artifactId>
             <version>${selenium.version}</version>
         </dependency>
+        <dependency>
+            <groupId>io.qameta.allure</groupId>
+            <artifactId>allure-testng</artifactId>
+            <version>${allure-testng.version}</version>
+        </dependency>
     </dependencies>
 
     <build>
-        <pluginManagement>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -44,10 +50,18 @@
                     <systemPropertyVariables>
                         <environment>${default.env}</environment>
                     </systemPropertyVariables>
+                    <argLine>-javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar"</argLine>
                     <suiteXmlFiles>
                         <suiteXmlFile>${testNgSuitFilePath}${suite}.xml</suiteXmlFile>
                     </suiteXmlFiles>
                 </configuration>
+                <dependencies>
+                    <dependency>
+                        <groupId>org.aspectj</groupId>
+                        <artifactId>aspectjweaver</artifactId>
+                        <version>${aspectj.version}</version>
+                    </dependency>
+                </dependencies>
             </plugin>
             <plugin>
                 <groupId>io.qameta.allure</groupId>
@@ -56,7 +70,6 @@
             </plugin>
 
         </plugins>
-        </pluginManagement>
     </build>
 
 </project>

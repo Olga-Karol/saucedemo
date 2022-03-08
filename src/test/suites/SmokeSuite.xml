@@ -1,36 +1,41 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<suite name="Smoke Test Suite">
-    <groups>
+<suite name="Smoke Test Suite" parallel="tests" thread-count="4">
+<!--    <groups>
         <run>
             <exclude name="Failed"/>
             <exclude name="Flaky"/>
         </run>
-    </groups>
+    </groups>-->
+
+    <listeners>
+        <listener class-name="utils.TestListener" />
+    </listeners>
+
     <test name="Login test">
         <classes>
             <class name="saucetest.LoginTest" />
         </classes>
-    </test> <!-- Test -->
-    <!--<test name="Product test">
+    </test>
+    <test name="Product test">
         <classes>
             <class name="saucetest.ProductTest" />
         </classes>
-    </test> &lt;!&ndash; Test &ndash;&gt;
+    </test> <!-- Test -->
     <test name="Order test">
         <classes>
             <class name="saucetest.OrderProductTest" />
         </classes>
-    </test> &lt;!&ndash; Test &ndash;&gt;
+    </test> <!-- Test -->
     <test name="Catalog test">
         <classes>
             <class name="saucetest.CatalogTest" />
         </classes>
-    </test> &lt;!&ndash; Test &ndash;&gt;
+    </test> <!-- Test -->
     <test name="Maven external property test">
         <classes>
             <class name="mavenParams.ExternalPropertiesTest" />
         </classes>
-    </test> &lt;!&ndash; Test &ndash;&gt;-->
+    </test> <!-- Test -->
 </suite>
 

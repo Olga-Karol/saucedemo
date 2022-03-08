@@ -4,3 +4,7 @@
 /pom.xml
 /src/test/resources/
 /src/main/resources/
+/src/test/java/utils/FileUtils.java
+/src/test/java/utils/TestListener.java
+/src/test/java/utils/AllureUtils.java
+/.allure/
